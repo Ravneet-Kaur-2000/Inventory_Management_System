@@ -256,7 +256,8 @@ class Inventory:
                     product = Product(item["id"], item["name"], float(item["price"]), item["quantity"])
                     self.products.append(product)
 
-    def print_table(self, rows: list = None) -> None:
+    @staticmethod
+    def print_table(rows: list = None) -> None:
         """
         Function to print the list of products in a particular format using tabulate for good structure
 
