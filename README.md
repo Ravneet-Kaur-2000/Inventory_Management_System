@@ -24,7 +24,7 @@ To get a local copy up and running follow these simple steps.
    ```sh
    git clone https://github.com/Ravneet-Kaur-2000/Inventory_Management_System.git
    ```
-2. If tabulate package not there, install it
+2. If tabulate package is missing
    ```sh
    pip install tabulate
    ```
@@ -34,7 +34,7 @@ To get a local copy up and running follow these simple steps.
    ```
 
 ## Formatter Used
-Autopepe8: automatically formats Python code to conform to the PEP 8 style guide
+Autopep8: automatically formats Python code to conform to the PEP 8 style guide
 
 1. Install
    ```sh
