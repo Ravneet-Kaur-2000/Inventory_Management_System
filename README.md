@@ -5,8 +5,8 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#installation">Formatter Used</a></li>
-    <li><a href="#assumptions">Assumptions Made</a></li>
+    <li><a href="#formatter-used">Formatter Used</a></li>
+    <li><a href="#assumptions-made">Assumptions Made</a></li>
 </details>
 
 
