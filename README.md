@@ -13,7 +13,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This system will allow users to manage products, track inventory levels, and generate reports
+This system allows users to manage products, track inventory levels, and generate reports.
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -55,4 +55,4 @@ Documentation - https://pypi.org/project/autopep8/
 6. If we run the program for the first time, products.json is created. If we change the data and exit the program and then run it again, the changed data is loaded, ensuring data persistence after the JSON file is created.
 7. The ids are automatically assigned to the products. If the list of products is empty, the ids start from 101; otherwise, when a new product is added, its id is max(existing ids) + 1.
 8. Try and except blocks have been incorporated for proper error handling. All edge cases, for example, negative values for price and quantity, and many more have been handled, and proper error messages are displayed for smoother operation.
-
+9. Simple doctest have also been added as a sanity check.
