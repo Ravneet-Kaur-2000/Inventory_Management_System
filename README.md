@@ -30,7 +30,7 @@ To get a local copy up and running follow these simple steps.
    ```
 2. Run inventory.py file
    ```sh
-   python inventory.py
+   python inventory_management.py
    ```
 
 ## Formatter Used
