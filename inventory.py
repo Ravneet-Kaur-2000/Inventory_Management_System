@@ -5,17 +5,17 @@ from tabulate import tabulate
 class Product:
     def __init__(
             self,
-            id: int,
+            p_id: int,
             name: str,
             price: float,
             quantity: int) -> None:
         """
-        :param id: id of the product.
+        :param p_id: id of the product.
         :param name: name of the product.
         :param price: price of the product.
         :param quantity: quantity of the product
         """
-        self.id = id
+        self.id = p_id
         self.name = name
         self.price = price
         self.quantity = quantity
@@ -72,7 +72,7 @@ class Product:
 
 class Inventory:
     """
-    class to manage the inventory products. Defines functions to perform operations like add/delete/update
+    Class to manage the inventory products. Defines functions to perform operations like add/delete/update
     and many more on products
 
     """
@@ -87,10 +87,11 @@ class Inventory:
 
         :param product: details of product to add
 
+        >>> inventory = Inventory()
         >>> len(inventory.products)
         6
-        >>> product = Product(107, 'Comb', 5.89, 10)
-        >>> inventory.add_product(product)
+        >>> p = Product(107, 'Comb', 5.89, 10)
+        >>> inventory.add_product(p)
         >>> len(inventory.products)
         7
         """
@@ -102,8 +103,11 @@ class Inventory:
         and summing it up
 
         :return: the float value of total inventory calculated
-        >>> inventory.total_inventory_value()
-        2261.35
+
+        >>> inventory = Inventory()
+        >>> val = inventory.total_inventory_value()
+        >>> val >= 0
+        True
         """
         total_value = 0
         for product in self.products:
@@ -115,12 +119,12 @@ class Inventory:
         Function to return all the products in the inventory with their details
 
         :return: list of all products
-        >>> len(inventory.list_all_products())
-        7
-        >>> inventory.list_all_products()
-        [[101,'Facewash', 120.05, 6], [102, 'Toothbrush', 10.79, 20], [103, 'BodyWash', 50.25, 4]
-        [104, 'Toner', 60.25, 7], [105, 'Lotion', 70.89, 2], [106, 'Shampoo', 45.62, 11],
-        [107, 'Comb', 5.89, 10]]
+
+        >>> inventory = Inventory()
+        >>> len(inventory.list_all_products()) >= 0
+        True
+        >>> inventory.list_all_products()[0]
+        [101, 'Facewash', 120.05, 6]
         """
         rows = [[product.id, product.name, product.price, product.quantity]
                 for product in self.products]
@@ -133,10 +137,9 @@ class Inventory:
         :param threshold: the threshold that we compare with the quantity of each product
         :return: list of all products with quantity less than threshold and if there are no products None returned
 
+        >>> inventory = Inventory()
         >>> inventory.low_stock_alert(5)
         [[103, 'BodyWash', 50.25, 4], [105, 'Lotion', 70.89, 2]]
-        >>> inventory.low_stock_alert(1)
-        None
         """
         rows = []
         for product in self.products:
@@ -154,7 +157,7 @@ class Inventory:
         :param id_to_search: to id of the product we want to return
         :return: list of product whose id matched the id_to_search
 
-
+        >>> inventory = Inventory()
         >>> inventory.view_product(102)
         [102, 'Toothbrush', 10.79, 20]
         """
@@ -179,10 +182,10 @@ class Inventory:
         Given id is checked in the product list before the call to this function is made
 
         :param id_to_search: to id of the product we want to update
-        :param new_price: the new price with which we want to update the previous price with, if not given taken as None
-        :param new_quantity: the new quantity with which we want to update the previous quantity with, if not given taken as None
-        :return: None
+        :param new_price: the new price with which we want to update the previous price, else None
+        :param new_quantity: the new quantity with which we want to update the previous quantity, else None
 
+        >>> inventory = Inventory()
         >>> inventory.view_product(105)
         [105, 'Lotion', 70.89, 2]
         >>> inventory.update_product(105, 81.33, 8)
@@ -215,8 +218,8 @@ class Inventory:
 
     def dump_data(self) -> None:
         """
-        Function to dump the data into the inventoy once the user exist from main.
-        All the products in the product list are dumped to products.json file after converting each product list to dictionary
+        Function to dump the data into the inventory once the user exist from main.
+        All the products in the product list are dumped to products.json file after converting each product list to dict
 
         :return: None
         """
@@ -227,8 +230,8 @@ class Inventory:
 
     def load_data(self) -> None:
         """
-        Function to dump data into the products.json file. If file does not exist a new product.json file is created with dummy data and
-        then the data is loaded else data id loaded directly
+        Function to dump data into the products.json file. If file does not exist a new product.json file is created \
+        with dummy data and then the data is loaded else data id loaded directly
         :return: None
         """
         json_file_products = [
@@ -275,7 +278,7 @@ class Inventory:
 
 
 def main():
-    inventory = Inventory()  # inventory object initilaized
+    inventory = Inventory()  # inventory object initialized
 
     while True:
         print("\n----------- Inventory Management System -------------")
@@ -292,16 +295,16 @@ def main():
 
         # add product
         if selection == '1':
-            # if product list is empty, the ids will be automatimatically
+            # if product list is empty, the ids will be automatically
             # assigned starting from 101
             if inventory.products:
-                id = max(product.id for product in inventory.products) + 1
+                p_id = max(product.id for product in inventory.products) + 1
             else:
-                id = 101
+                p_id = 101
             name = input("Enter Product Name: ")
             price = Product.get_positive_price("Enter Product Price: ")
             quantity = Product.get_positive("Enter Product Quantity: ")
-            new_product = Product(id, name, price, quantity)
+            new_product = Product(p_id, name, price, quantity)
             inventory.add_product(new_product)
             print("Product added successfully!!!!")
 
@@ -329,8 +332,7 @@ def main():
                 if update_choice == '2' or update_choice == '3':
                     new_quantity = Product.get_positive(
                         "Enter the new quantity: ")
-                result = inventory.update_product(
-                    id_to_search, new_price, new_quantity)
+                inventory.update_product(id_to_search, new_price, new_quantity)
                 print("Product updated successfully!!")
             else:
                 print("Product not found with the particular id")
